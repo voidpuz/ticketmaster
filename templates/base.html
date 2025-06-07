@@ -1,4 +1,4 @@
-<!-- base.html -->
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,22 +8,38 @@
     {% block extra_head %}{% endblock %}
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/">TicketMaster</a>
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav ms-auto">
-                {% if user.is_authenticated %}
-                    <li class="nav-item"><a class="nav-link" href="/profile/">Profile</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/logout/">Logout</a></li>
-                {% else %}
-                    <li class="nav-item"><a class="nav-link" href="/login/">Login</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/signup/">Register</a></li>
-                {% endif %}
-            </ul>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">TicketMaster</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    {% if user.is_authenticated %}
+                        <li class="nav-item"><a class="nav-link" href="/profile/">{% trans "Profile" %}</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/logout/">{% trans "Logout" %}</a></li>
+                    {% else %}
+                        <li class="nav-item"><a class="nav-link" href="/login/">{% trans "Login" %}</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/signup/">{% trans "Register" %}</a></li>
+                    {% endif %}
+    
+                    <!-- Language chooser -->
+                    <li class="nav-item">
+                        <form action="{% url 'set_language' %}" method="post" class="d-flex align-items-center ms-3">
+                            {% csrf_token %}
+                            <select name="language" class="form-select form-select-sm" onchange="this.form.submit()">
+                                <option value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>EN</option>
+                                <option value="uz" {% if LANGUAGE_CODE == 'uz' %}selected{% endif %}>UZ</option>
+                                <option value="ru" {% if LANGUAGE_CODE == 'ru' %}selected{% endif %}>RU</option>
+                            </select>
+                        </form>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
+    
 <div class="container mt-4">
     {% block content %}{% endblock %}
 </div>

@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 from common.models import BaseModel
 
@@ -11,8 +12,8 @@ class Venue(BaseModel):
     map_urls = models.URLField(max_length=255)
 
     class Meta:
-        verbose_name = "Venue"
-        verbose_name_plural = "Venues"
+        verbose_name = _("Venue")
+        verbose_name_plural = _("Venues")
     
     def __str__(self):
         return f"Venue<{self.name}>"
@@ -25,8 +26,8 @@ class Seat(BaseModel):
     section = models.CharField(max_length=10)
 
     class Meta:
-        verbose_name = "Seat"
-        verbose_name_plural = "Seats"
+        verbose_name = _("Seat")
+        verbose_name_plural = _("Seats")
 
     def __str__(self):
         return f"Seat<{self.seat_number}>"
@@ -42,8 +43,8 @@ class Event(BaseModel):
     is_active = models.BooleanField(default=True)
 
     class Meta:
-        verbose_name = "Event"
-        verbose_name_plural = "Events"
+        verbose_name = _("Event")
+        verbose_name_plural = _("Events")
 
     def __str__(self):
         return f"Event<{self.title}>"
@@ -56,8 +57,8 @@ class TicketType(BaseModel):
     event = models.ForeignKey("tickets.Event", on_delete=models.CASCADE)
 
     class Meta:
-        verbose_name = "Ticket Type"
-        verbose_name_plural = "Ticket Types"
+        verbose_name = _("Ticket Type")
+        verbose_name_plural = _("Ticket Types")
 
     def __str__(self):
         return f"Ticket Type<{self.name}>"
@@ -70,5 +71,5 @@ class Ticket(BaseModel):
     qr_code = models.ImageField(upload_to="qr_codes")
 
     class Meta:
-        verbose_name = "Ticket"
-        verbose_name_plural = "Tickets"
+        verbose_name = _("Ticket")
+        verbose_name_plural = _("Tickets")
