@@ -1,0 +1,14 @@
+<!-- events/event_detail.html -->
+{% extends "base.html" %}
+
+{% block title %}{{ event.title }}{% endblock %}
+
+{% block content %}
+
+<h2>{{ event.title }}</h2>
+<p><strong>Date:</strong> {{ event.date }}</p>
+<p><strong>Venue:</strong> {{ event.venue.name }}</p>
+<p>{{ event.description }}</p>
+<a href="#" class="btn btn-success">Buy Ticket</a>
+
+{% endblock %}
