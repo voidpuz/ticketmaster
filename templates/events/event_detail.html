@@ -6,7 +6,7 @@
 {% block content %}
 
 <h2>{{ event.title }}</h2>
-<p><strong>Date:</strong> {{ event.date }}</p>
+<p><strong>Date:</strong> {{ event.start_time | date:'Y-m-d H:i' }} - {{ event.end_time| date:'Y-m-d H:i' }}</p>
 <p><strong>Venue:</strong> {{ event.venue.name }}</p>
 <p>{{ event.description }}</p>
 <a href="#" class="btn btn-success">Buy Ticket</a>
